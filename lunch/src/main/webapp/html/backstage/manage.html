@@ -1,0 +1,80 @@
+<div ng-include="'html/backstage/tpl/head.html'"></div>
+<section class="container">
+    <div class="row">
+        <div class="col-md-3" ng-repeat="item in dateList">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4>{{item.date}} {{item.modTime}}</h4>
+                </div>
+                <div class="panel-body">
+                    <p>A餐：{{item.selectKeyA | getSelectValue}}</p>
+                    <p>B餐：{{item.selectKeyB | getSelectValue}}</p>
+                    <p>C餐：{{item.selectKeyC | getSelectValue}}</p>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-danger" ng-click="deleteItem(item.date)" ng-if="item.isPush == 0">删除</button>
+                    <button class="btn btn-primary" ng-click="modItem(item.date)" ng-if="item.isPush == 0">修改</button>
+                    <button class="btn btn-success" ng-click="pushItem(item.date)" ng-if="item.isPush == 0">发布</button>
+                    <button class="btn btn-success disabled" ng-if="item.isPush == 1">已发布</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" id="addBtn" ng-click="newItem(date)"></div>
+        {{test1}}
+    </div>
+</section>
+<div class="modal fade" id="addBox" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">菜单</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form">
+                    <div class="form-group">
+                        <label for="date">日期</label>{{date}}
+                        <input type="date" id="date" class="form-control" ng-model="date">
+                    </div>
+                    <div class="form-group">
+                        <label for="selectA">A餐</label>
+                        <select class="form-control" id="selectA" ng-model="selectKeyA">
+                            <option ng-repeat="item in selectA" value="{{item.key}}">{{item.value}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectB">B餐</label>
+                        <select class="form-control" id="selectB" ng-model="selectKeyB">
+                            <option ng-repeat="item in selectA" value="{{item.key}}">{{item.value}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectC">C餐</label>
+                        <select class="form-control" id="selectC" ng-model="selectKeyC">
+                            <option ng-repeat="item in selectA" value="{{item.key}}">{{item.value}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary form-control" ng-click="addOne(date)">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #addBtn {
+        height: 237px;
+        background: url("../../resource/images/u8.png") no-repeat;
+        background-size: 60%;
+        background-position: center;
+        transition: background-color 1s;
+        -moz-transition: background-color 1s;
+        -webkit-transition: background-color 1s;
+        -o-transition: background-color 1s;
+    }
+    #addBtn:hover {
+        cursor: pointer;
+        background-color: rgba(208, 208, 208, 0.2);
+    }
+</style>

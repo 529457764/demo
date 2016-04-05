@@ -1,0 +1,38 @@
+<form class="form-inline margin-bottom-10 row">
+    <div class="form-group col-md-5">
+        <label for="date">日期:</label>
+        <input type="date" id="date" ng-model="date" class="form-control">
+    </div>
+    <div class="form-group col-md-5">
+        <label for="type">类型:</label>
+        <select class="form-control" id="type" name="type" ng-model="typeValue" ng-change="search()">
+            <option ng-repeat="item in type" value="{{item.value}}">{{item.key}}</option>
+        </select>
+    </div>
+    <div class="form-group col-md-2">
+        <button class="btn btn-primary" ng-click="search()">查询</button>
+    </div>
+</form>
+<table class="table table-bordered" ng-if="list.length > 0">
+    <thead>
+        <tr>
+            <th>地点</th>
+            <th>A餐</th>
+            <th>B餐</th>
+            <th>C餐</th>
+            <th>总计</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in list">
+            <td>{{item.location}}</td>
+            <td>{{item.aCount}}</td>
+            <td>{{item.bCount}}</td>
+            <td>{{item.cCount}}</td>
+            <td>{{item.aCount + item.bCount + item.cCount}}</td>
+        </tr>
+    </tbody>
+</table>
+<div ng-if="list.length <= 0">
+    <p>没有找到相关数据</p>
+</div>
